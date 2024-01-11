@@ -2,7 +2,7 @@ import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
 import RealTimeEditor from "./RealTimeEditor";
 import Logo from "./logo/Logo";
-import Container from "./Container/Container";
+import Container from "./container/Container";
 import Input from "./Input";
 import Select from "./Select";
 import auth from "../service/auth";
