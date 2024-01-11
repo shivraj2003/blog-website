@@ -19,10 +19,12 @@ function SignUp() {
             if(response){
                 const userData=await auth.getCurrentUser()
                 
-                if(userData)
-                { dispatch(login(userData))
-               navigate('/')}
-            }}
+                 if (userData) {
+                    dispatch(login(userData))
+                      
+                        navigate('/');
+                    
+                 }}}
             catch(error){
                 setError(error)
                 console.log("error in login",error)

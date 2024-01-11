@@ -13,9 +13,14 @@ initialState,
 reducers:{
 
     login:(state,action)=>{
-        console.log("action.payload",action.payload)
-        state.userData=action.payload
+      
+        if(action.payload.userData)
+        {state.userData=action.payload.userData}
+        else state.userData=action.payload ;
+        
+
         state.status=true
+        
     },
     logout:(state)=>{
         state.userData=null

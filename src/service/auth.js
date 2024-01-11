@@ -38,10 +38,7 @@ export class Auth{
        
         async getCurrentUser() {
             
-            // if (!this.account) {
-            //     console.log("User is not logged in");
-            //     return null;
-            // }
+           
             try {
                 return await this.account.get();
             } catch (error) {

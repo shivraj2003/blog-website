@@ -50,15 +50,14 @@ function PostForm({post}) {
             }
         } else {
             const file = await dataService.uploadFile(data.image[0]);
-     //console.log("file",file)
+     
             if (file) {
                 const fileId = file.$id;
                 data.featuredImage = fileId;
-               // console.log("data feature",data)
-               // console.log("fileId",userData.$id)
-                //  userId  removed: todo
-                const dbPost = await dataService.createPost({ ...data,userId:userData.userData.$id});
-
+              
+               
+                const dbPost = await dataService.createPost({ ...data,userId:'userData.$id'});
+console.log(dbPost)
                 if (dbPost) {
                     navigate(`/post/${dbPost.$id}`);
                 }

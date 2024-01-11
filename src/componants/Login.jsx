@@ -20,6 +20,7 @@ function Login() {
             const response=await auth.login(data)
             if(response){
                 const userData=await auth.getCurrentUser()
+                console.log("login check",userData)
                 if(userData)
                  dispatch(finalLogin(userData));
                navigate("/")}

@@ -1,18 +1,41 @@
 import React from 'react'
 import { Container, PostCard } from '../index'
 import { useState,useEffect } from 'react'
+import auth from '../../service/auth'
 import dataService from '../../service/dataService'
 
 function Home() {
-    const [posts, setPosts] = useState([])
+     const [posts, setPosts] = useState([])
+    // useEffect(() => {
+    // dataService.getPosts([])
+    //     .then((data) => {
+    //         if(data){
+    //             setPosts(data.documents)
+    //         }
+    //      }
+    // )}, [])
+
+    const [user, setUser] = useState(null);
+
+    
+
     useEffect(() => {
-    dataService.getPosts([])
-        .then((data) => {
-            if(data){
-                setPosts(data.documents)
+        // Fetch posts when the component mounts or the user changes
+        const fetchPosts = async () => {
+            const userData = await auth.getCurrentUser();
+            setUser(userData);
+
+            // Fetch posts only if there's a logged-in user
+            if (userData) {
+                const data = await dataService.getPosts([]);
+                if (data) {
+                    setPosts(data.documents);
+                }
             }
-         }
-    )}, [])
+        };
+
+        fetchPosts();
+    }, [user]);
   
     if (posts.length === 0) {
         return (
