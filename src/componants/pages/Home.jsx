@@ -3,6 +3,7 @@ import { Container, PostCard } from '../index'
 import { useState,useEffect } from 'react'
 import auth from '../../service/auth'
 import dataService from '../../service/dataService'
+import { useSelector } from 'react-redux'
 
 function Home() {
      const [posts, setPosts] = useState([])
@@ -13,18 +14,18 @@ function Home() {
     //             setPosts(data.documents)
     //         }
     //      }
-    // )}, [])
+    // )}, [posts])
 
-    const [user, setUser] = useState(null);
+     const [user, setUser] = useState(null);
 
-    
+    const userStatus= useSelector((state) => state.auth.userData);
 
     useEffect(() => {
         // Fetch posts when the component mounts or the user changes
         const fetchPosts = async () => {
             const userData = await auth.getCurrentUser();
             setUser(userData);
-
+console.log("userData",userData);
             // Fetch posts only if there's a logged-in user
             if (userData) {
                 const data = await dataService.getPosts([]);
@@ -35,7 +36,7 @@ function Home() {
         };
 
         fetchPosts();
-    }, [user]);
+    }, [user,posts,userStatus]);
   
     if (posts.length === 0) {
         return (

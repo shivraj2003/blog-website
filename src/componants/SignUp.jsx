@@ -5,7 +5,8 @@ import auth from '../service/auth'
 import { useState } from 'react'
 import {Logo,Input,Button} from './index'
 import { useDispatch } from 'react-redux'
-import {login } from '../store/authSlice'
+import {login } from '../store/authSlice.js'
+import { useSelector } from 'react-redux'
 function SignUp() {
     const dispatch=useDispatch()
     const {register,handleSubmit}=useForm()
@@ -18,18 +19,24 @@ function SignUp() {
             const response=await auth.createAccount(data)
             if(response){
                 const userData=await auth.getCurrentUser()
-                
+                console.log("userData after signup call",userData)
                  if (userData) {
-                    dispatch(login(userData))
-                      
+                  const response=  dispatch(login(userData))
+                      console.log("response",response)
                         navigate('/');
                     
-                 }}}
+                 }
+                }}
             catch(error){
                 setError(error)
                 console.log("error in login",error)
             }
     }
+
+    const userStatus=useSelector((state)=>state.auth.userData)
+
+
+
     return (
         <div className="flex items-center justify-center">
                 <div className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10`}>

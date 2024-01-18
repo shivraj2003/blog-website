@@ -13,8 +13,8 @@ export default function Post() {
     const userData = useSelector((state) => state.auth.userData);
     
     
-    const isAuthor = post && userData ? post.userId === 'userData.$id' : false;
-console.log("postId",post);
+console.log("post",post);
+console.log("userData",userData);
 
 
     useEffect(() => {
@@ -24,7 +24,10 @@ console.log("postId",post);
                 else navigate("/");
             });
         } else navigate("/");
-    }, [slug, navigate]);
+    }, [slug, navigate,userData]);
+    const isAuthor = post && userData ? post?.userId === userData?.$id : false;
+
+   
 
     const deletePost = () => {
         dataService.deletePost(post.$id).then((status) => {

@@ -31,7 +31,7 @@ function PostForm({post}) {
 
         
     
-    const submit = async (data) => {console.log("data",data)
+    const submit = async (data) => {
         if (post) {
             const file = data.image[0] ? await dataService.uploadFile(data.image[0]) : null;
 
@@ -54,10 +54,10 @@ function PostForm({post}) {
             if (file) {
                 const fileId = file.$id;
                 data.featuredImage = fileId;
-              
+             
                
-                const dbPost = await dataService.createPost({ ...data,userId:'userData.$id'});
-console.log(dbPost)
+                const dbPost = await dataService.createPost({ ...data,userId:userData.$id});
+
                 if (dbPost) {
                     navigate(`/post/${dbPost.$id}`);
                 }

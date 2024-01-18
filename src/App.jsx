@@ -7,6 +7,7 @@ import {useDispatch} from 'react-redux'
 import { login } from './store/authSlice.js'
 import { logout } from './store/authSlice.js'
 import { Outlet } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 
 
@@ -40,7 +41,7 @@ const dispatch=useDispatch()
     </div>
   </div>
   )
-  :null
+  :<div className="w-full h-screen flex justify-center items-center">loading...</div>
     
     
    

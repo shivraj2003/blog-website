@@ -14,9 +14,8 @@ reducers:{
 
     login:(state,action)=>{
       
-        if(action.payload.userData)
-        {state.userData=action.payload.userData}
-        else state.userData=action.payload ;
+        
+            state.userData=action.payload 
         
 
         state.status=true
